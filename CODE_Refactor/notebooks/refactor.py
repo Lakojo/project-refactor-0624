@@ -39,8 +39,6 @@ df=pd.read_csv('data/telecom_users_cleaned.csv')#, index_col=0)
 col_to_numeric="TotalCharges"
 #df.head()
 
-# %%
-#df.tail(1)
 
 # %%
 df_shape=df.shape
@@ -51,12 +49,9 @@ df.drop_duplicates(inplace=True)
 drop_duplicates=df_shape[0]-df.shape[0]
 print(drop_duplicates, 'row(s) are dropped')
 
-# %%
-#df.info()
 
 # %%
 df_columns=df.columns
-df.columns
 
 # %%
 ## Create a dataframe with continuous columns 
@@ -70,7 +65,7 @@ print('Cartegorical columns are:', col_cat.values)
 
 
 # %%
-df[col_to_numeric]= pd.to_numeric(df.TotalCharges, errors='coerce')
+df[col_to_numeric]= pd.to_numeric(df[col_to_numeric], errors='coerce')
 
 # %%
 ## Create a dataframe with continuous columns 
@@ -86,12 +81,6 @@ print('Cartegorical columns are:', col_cat.values)
 bin_col= df.columns[df.nunique().values==2]
 for col in bin_col: #['Partner','Dependents', 'PhoneService','PaperlessBilling' ,'Churn']:
     df[col]=df[col].replace(to_replace=['no', 'yes'], value=[0, 1])
-    
-    
-df.head()
-
-# %%
-#df.describe()
 
 # %%
 # How much unique values per column?
@@ -131,9 +120,6 @@ print('Columns with more the 5% missing values:\n', miss5_col)
 
 # %%
 # Drop Features e.g. to prevent data leagake
-
-#
-
 act=input('Are the any Features which may cause data lekage? Do you want to drop columns?(y/n)')
 if act== 'y':
     cols=input('Enter the name(s) of the column(s) as list')    
@@ -149,7 +135,7 @@ if act== 'y':
     df.head(2)
 
 # %%
-#correlation heatmap
+# Correlation heatmap
 sns.heatmap(df_cont.corr(),annot=True)
 
 # %%
@@ -157,44 +143,18 @@ sns.heatmap(df_cont.corr(),annot=True)
 plt.figure(figsize=(15,8))
 sns.boxplot(data=df_cont,orient="h")
 
-# %%
-# df[target_name].value_counts()
-
-# %%
-# df_cont['tenure']
 
 # %%
 for col in col_cont:
     plt.figure(figsize=(10,4))
     sns.histplot(x=df_cont[col],hue=df[target_name],multiple="dodge")
 
-# %%
-#histplots of the features
-#plt.figure(figsize=(15,8))
 
 for col in col_cont:
     plt.figure(figsize=(10,4))
     sns.barplot(y=df_cont[col],hue=df[target_name])
 
-# %%
-#df.isnull().sum()
 
-# %%
-#histplots of the features
-#plt.figure(figsize=(15,8))
-
-# for col in col_cat:
-#    plt.figure(figsize=(10,4))
-#    sns.histplot(data=df[target_name],hue=df_cat[col])
-
-# %%
-#df[target_name]
-
-# %%
-#df.isnull().sum()
-
-# %%
-#df.dropna(inplace=True)
 
 # %%
 from sklearn.model_selection import train_test_split
@@ -233,16 +193,9 @@ data_transformer = ColumnTransformer(
 # %%
 X_scaled=data_transformer.fit_transform(df)
 
-# %%
-# X_scaled.savez()
 
-# %%
-#pip install pycaret
 
-# %%
-X_scaled.shape
-
-# %%
+""" # %%
 from pycaret.classification import *
 
 clf = setup(data=pd.concat([X_scaled,df[target_name]], axis=1),
@@ -498,3 +451,4 @@ plt.show()
 
 
 
+ """
