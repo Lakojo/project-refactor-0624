@@ -1,4 +1,4 @@
-# %%
+""" # %%
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -28,7 +28,7 @@ import importlib
 importlib.reload(example)
 
 # %%
-example.do_something()
+example.do_something() """
 
 # %%
 # hardcoded -> config

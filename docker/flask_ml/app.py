@@ -1,12 +1,10 @@
 import base64
 from io import BytesIO
-
 import pandas as pd
-
 from flask import Flask
-
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+
 app = Flask(__name__)
 
 @app.route('/')
