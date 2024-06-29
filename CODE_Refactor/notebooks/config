@@ -1,0 +1,9 @@
+#parameters
+
+dfname='telecom_users'
+target_name='Churn'
+df=pd.read_csv('data/telecom_users_cleaned.csv')#, index_col=0)
+
+# to numeric
+
+col_to_numeric="TotalCharges"
